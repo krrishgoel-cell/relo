@@ -1,0 +1,23 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "exportlens",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/1krrishgoel/Downloads/exportlens", "--", "--port", "5199"],
+      "port": 5199
+    },
+    {
+      "name": "kindred-connect",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/1krrishgoel/Downloads/Kindred Connect (1)", "--", "--port", "5299"],
+      "port": 5299
+    },
+    {
+      "name": "relo",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/1krrishgoel/Downloads/kindred-connect-main", "--", "--port", "5300"],
+      "port": 5300
+    }
+  ]
+}
