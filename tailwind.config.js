@@ -14,8 +14,8 @@ export default {
         mono: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       colors: {
-        ink: "#111113",
-        paper: "#FAFAF8",
+        ink: "#171613",
+        paper: "#F2F0E9",
       },
     },
   },

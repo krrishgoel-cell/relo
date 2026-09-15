@@ -7,6 +7,16 @@ html {
 }
 
 body {
-  background-color: #fafaf8;
-  color: #111113;
+  background-color: #f2f0e9;
+  color: #171613;
+}
+
+.grid-pattern {
+  background-image: linear-gradient(
+      to right,
+      rgba(23, 22, 19, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(23, 22, 19, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
