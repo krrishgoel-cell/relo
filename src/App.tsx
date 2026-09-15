@@ -66,6 +66,7 @@ type SubmitStatus = "idle" | "loading" | "success" | "error";
 
 function WaitlistForm() {
   const [email, setEmail] = useState("");
+  const [problem, setProblem] = useState("");
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -79,9 +80,10 @@ function WaitlistForm() {
     }
 
     setStatus("loading");
-    const { error } = await supabase
-      .from("waitlist")
-      .insert({ email: email.trim().toLowerCase() });
+    const { error } = await supabase.from("waitlist").insert({
+      email: email.trim().toLowerCase(),
+      problem: problem.trim() || null,
+    });
 
     if (error) {
       setStatus("error");
@@ -95,6 +97,7 @@ function WaitlistForm() {
 
     setStatus("success");
     setEmail("");
+    setProblem("");
   }
 
   if (status === "success") {
@@ -106,26 +109,32 @@ function WaitlistForm() {
   }
 
   return (
-    <div className="mx-auto mt-8 max-w-md">
-      <form
-        className="flex flex-col gap-3 sm:flex-row"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="you@email.com"
-          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500"
+    <div className="mx-auto mt-8 max-w-md text-left">
+      <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+        <textarea
+          value={problem}
+          onChange={(e) => setProblem(e.target.value)}
+          placeholder="Tell us about a subscription problem you've hit when moving (optional) — e.g. Netflix kept billing my old card for three months after I left."
+          rows={3}
+          className="w-full resize-none rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500"
         />
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="whitespace-nowrap rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-60"
-        >
-          {status === "loading" ? "Joining..." : "Get the free checklist"}
-        </button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@email.com"
+            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 text-sm outline-none focus:border-blue-500"
+          />
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="whitespace-nowrap rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 disabled:opacity-60"
+          >
+            {status === "loading" ? "Joining..." : "Get the free checklist"}
+          </button>
+        </div>
       </form>
       {status === "error" && (
         <p className="mt-2 text-sm text-red-600">{errorMessage}</p>
